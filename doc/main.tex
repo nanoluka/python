@@ -1,0 +1,456 @@
+\documentclass{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm]
+\usepackage[utf8]{inputenc}
+\usepackage[serbianc]{babel}
+\usepackage{textgreek}
+\usepackage{pgfpages}
+
+\usetheme{Boadilla}
+\usecolortheme[named=violet]{structure}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[final]{pdfpages}
+\usepackage{xcolor}
+
+\usepackage{listings}
+
+
+
+\useoutertheme[footline=authortitle]{miniframes}
+
+\title[Програмски језик \textit{Python} - основи]{\color{black}\smallУвод у \\\color{violet}\normalsizeПрограмски језик \textit{Python}}
+\vspace{-4cm}\author{Александар Пајкановић}
+\titlegraphic{\includegraphics[width=2cm]{logo}}
+
+%\titlegraphic{\includegraphics[width=2cm]{logo}%\hspace{10.75cm}%
+
+%}
+\institute{\texttt{nanoluka.org}\\
+YouTube.com/nanoluka\\
+instagram.com/nanolukaorg\\
+twitter.com/nanolukaorg\\
+github.com/nanoluka\\
+\texttt{nanolukaorg@gmail.com}}
+
+\date{\color{violet}Октобар 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Кориштење овог документа}
+\begin{itemize}
+    \item \textbf{Лиценца}: 
+    \begin{itemize}
+        \item Документ и пратеће к\^{о}дове објављујем под лиценцом \color{violet}\href{https://creativecommons.org/licenses/by-sa/4.0//legalcode}{\textit{Attribution-ShareAlike — CC BY-СА}}\color{black}. Ова лиценца дозвољава ремикс и прераду, као и комерцијално кориштење дјела, ако/док се \textbf{правилно назначава име аутора} и ако се \textbf{прерада лиценцира под истим условима}. Ова лиценца се често упоређује са „\textit{copyleft}” лиценцирањем слободног софтвера или софтвера отвореног к\^{о}да. Сва дјела настала на основу дјела лиценцираног овом лиценцом, требало би да буду лиценцирана истом лиценцом, која, поред осталог, дозвољава комерцијално кориштење.
+    \end{itemize}
+    \item \textbf{Навођење (цитирање)}: 
+    \begin{itemize}
+        \item Ако сте користили овај документ као извор у сопственим материјалима, молим да цитирате на сљедећи начин: А. Пајкановић, ,,Увод у програмски језик \textit{C} кроз практичне примјере'', доступно на \color{violet}\href{github.com/nanoluka/python.git}{github.com/nanoluka/python.git}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Програмирање и програмски језици}
+\begin{itemize}
+    \item Рачунар у општем смислу је машина способна да изврши било који алгоритам пратећи дефинисан скуп правила - ткз. Тјурингова машина (теоријска замисао).
+    \item Алгоритам је недвосмислен метод рјешавања конкретног проблема
+    \item Рачунар се већ читав вијек састоји од процесора и меморије - ткз. Фон Нојманова архитектура (реализација)
+    \item Програмирање, у практичном смислу, можемо рећи да представља састављање текстуалног (понегдје и графичког) описа жељеног понашања рачунара у смислу обраде корисничких података и представљања резултата тог процеса кориснику
+    \item Програмски језик је скуп инструкција (кључних ријечи) које, ако су посложене у складу са унапријед дефинисаним правилима, рачунар може да прихвати - при чему ово ,,прихвати'' значи да је у стању да, узев дате податке корисника на улазу, кориснику прикаже очекивани излаз
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик \textit{Python}}
+\begin{itemize}
+    \item Постоји много подјела програмских језика, најважнија је на:
+    \begin{itemize}
+        \item језике вишег нивоа, и
+        \item језике нижег нивоа
+    \end{itemize}
+    \item \textit{Python} спада у језик вишег нивоа. Генерално, сви програмски језици за које сте чули су, у ствари, у истој групи.
+    \item Друга важна подјела је према парадигми којој програмски језик припада, тренутно су актуелне четири парадигме (које се, често, међусобно пресјецају):
+    \begin{itemize}
+        \item императивно програмирање,
+        \item функционално,
+        \item логичко, и
+        \item објектно-оријентисано.
+    \end{itemize}
+    \item У нашем данашњем језику можемо да пишемо програме који припадају двјема парадигмама - функционалном и објектно-оријентисаном програмирању
+    \item Ми, пак, данас нећемо користити ни једно ни друго
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик \textit{Python}}
+\begin{itemize}
+    \item Иначе, \textit{Python} је 1991. објавио Гвидо ван Росум
+    \item С обзиром да смо прошли пут причали о језику \textit{C}, ево неколико особина \textit{Python vs. C}:
+    \begin{itemize}
+        \item лакше га је савладати, синтакса је корисницима читљивија
+        \item \textit{Python} је интерпретирани језик, што значи да се једна по једна линија к\^{о}да преводе, док се \textit{C} програм компајлира. Као посљедица, извршавање \textit{Python} програма је спорије
+        \item иста чињеница узрокује лакше уочавање грешака
+        \item варијабле се не декларишу експлицитно, него имплицитно приликом прве употребе
+        \item нема показивача (напредна функционалност језика \textit{C}, нисмо се тиме бавили у другом предавању, наводим само потпуности ради
+        \item аутоматско рјешавање потенцијалних проблема са меморијом
+        \item неупоредиво већа подршка најразличитијих библиотека и пакета у свим могућим доменима науке, технологије и живота уопште
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Програмски језик \textit{Python}}
+\begin{itemize}
+    \item Укратко, поступак од идеје до реализације састоји се од четири корака:
+    \begin{enumerate}
+        \item алгоритам,
+        \item псеудо к\^{о}д,
+        \item изворни к\^{о}д - овдје се пише синтакса (\texttt{.py}),
+        \item и сад имамо три могућности:
+        \begin{itemize}
+            \item извршавање појединачних линија, директно из терминала,
+            \item извршавање у виду скрипте, и
+            \item превод у извршну датотеку (\texttt{.exe}) $\leftarrow$ нећемо радити
+        \end{itemize}
+    \end{enumerate}
+    \item На том путу, сусрећемо се са разним невољама, а подијелићемо их у грешке:
+    \begin{itemize}
+        \item синтаксичке, и
+        \item семантичке.
+    \end{itemize}
+    \item Ова презентација не представља потпуне информације о рачунарима, програмирању и програмском језику \textit{Python}, него служи као увод или преглед, како бисмо се упознали са основама и знали гдје и шта да тражимо како бисмо стварно научили.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Потребни алати}
+\begin{itemize}
+    \item Рачунар - бар током овог предавања, али може и телефон или таблет - само је унос проблематичан
+    \item \textit{Windows} оперативни систем - може, наравно, и неки други али данас рад демонстрирамо овако
+    \item \textit{Python} има двије актуелне верзије (2.7 и 3), с тим да се већ годинама упорно труде да потисну 2.7 - па је треба избјегавати за нове пројекте
+    \item \textit{Python} као апликација за \textit{Windows} бесплатно је доступан на \color{violet}\href{python.org}{https://www.python.org}\color{black}.
+    %\item \textit{Microsoft Visual Studio} је потребан за примјере седам и осам доступан на: \color{violet}\href{https://visualstudio.microsoft.com/downloads}{https://visualstudio.microsoft.com/downloads}\color{black}
+    \item Познавање енглеског језика
+    \item Добра воља, чврста одлука да се не одустаје и упоран рад
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 1 - Испис текста}
+
+\begin{itemize}
+\item \textit{File} $\rightarrow$ \textit{New File}
+\end{itemize}
+
+\begin{block}{HelloICBL}
+\begin{lstlisting}
+print("Hello ICBL!")
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item \textit{File} $\rightarrow$ \textit{Save}
+\item \textit{Run} $\rightarrow$ \textit{Run Module}
+\end{itemize}
+
+\begin{block}{Output}
+\begin{lstlisting}
+Hello ICBL!
+>>> 
+\end{lstlisting}
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Типови података}
+\begin{itemize}
+    \item Основна подјела сигнала:
+    \begin{itemize}
+        \item аналогни - звук, бежични пренос података, зрачење, слика
+        \item дигитални - запис аналогних, али користећи само ограничен број нивоа - ако су само два нивоа, онда су то бинарни сигнали
+    \end{itemize}
+    \item Данашњи комерцијално доступни рачунари су дигитални и разумију искључиво бинарне податке
+    \item Математички запис је дат прије два вијека, данас познат као бинарна или Булова алгебра
+    \item Једна бинарна цифра назива се бит (енгл. \textit{binary digit} $\rightarrow$ \textit{bit})
+    \item Осам бита је бајт (енгл. \textit{byte}), kilo, mega, итд.
+    \item Подаци су осмобитни, 32-битни, итд.
+    \item Корисни записи су још и октални и хексадецимални
+    \item Децимални број 6, осмобитно се представља као \texttt{00000110}, број 126 пишемо \texttt{01111110}, а -126 je \texttt{10000010}
+    \item Означени и неозначени
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 2 - Типови података}
+\begin{block}{DataTypes}
+\begin{lstlisting}
+x = 5
+print(type(x))
+x = "Hello World"
+x = 20
+x = 20.5
+x = ["apple", "banana", "cherry"]
+x = ("apple", "banana", "cherry")
+x = range(6)
+x = {"name" : "John", "age" : 36}
+x = {"apple", "banana", "cherry"}
+x = True
+
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 2 - Типови података}
+\begin{block}{Output}
+\begin{lstlisting}
+<class 'int'>
+<class 'str'>
+<class 'int'>
+<class 'float'>
+<class 'list'>
+<class 'tuple'>
+<class 'range'>
+<class 'dict'>
+<class 'set'>
+<class 'bool'>
+>>> 
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 3 - Аритметичке и логичке операције}
+\begin{block}{ALU}
+\begin{lstlisting}
+a = 2
+b = 4
+c = 'a'
+d = 6.2
+print("zbir: a+b = " + str(a+b))
+print("eksponent: a**b = " + str(a**b))
+print("proizvod: a*c = " + str(a*c))
+print("kolicnik - cjelobrojno: a//b = " + str(a//b))
+print("kolicnik - decimalno: a/d = " + str(a/d))
+print("jednakost: a == b = " + str(a==b))
+print("binarno I: a & b = " + str(a & b))
+print("logicko I: a and b = " + str(a and b))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Преклапање оператора, кастовање}
+    \begin{itemize}
+        \item Када помножимо два броја, добијемо производ
+        \item Шта ће бити ако помножимо број и слово?
+        \item Или број и ријеч?
+        \item Претварање једног типа податка у други назива се кастовање
+        \item Објекти:
+        \begin{itemize}
+            \item промјенљивих вријености - \textit{mutable}
+            \item непромјенљивих вриједнсоти - \textit{immutable}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Контрола т\^{о}ка}
+\begin{itemize}
+    \item Рачунари не одлучују. Бар не још увијек
+    \item Рачунари поступају по инструкцијама
+    \item Инструкција може да се изврши или не изврши у зависности од услова, односно може да се изврши једна или друга, опет, наравно, зависно од стања нечег другог:
+    \begin{itemize}
+        \item ако је температура већа од 22$^o$ C, искључи гријање
+        \item ако је температура мања од 18$^o$ C, укључи гријање
+        \item не извршавај ништа, док се не притисне овај тастер
+        \item изврши сабирање свих бројева у овом низу, тј. 10 000 сабирања
+    \end{itemize}
+    \item Графички приказ т\^{о}ка извршавања назива се дијаграм т\^{о}ка
+    \item Т\^{о}к контролишемо користећи се гранањем (\texttt{if-else, switch}) и петљама (\texttt{for, while})
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 4 - Унос података}
+\begin{block}{DataInput}
+\begin{lstlisting}
+x = input("prvi broj: ")
+y = input("drugi broj: ")
+x = int(x)
+y = int(y)
+z = x + y
+print("Zbir je: " + str(z))
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 5 - Гранање}
+\begin{block}{Branch}
+\begin{lstlisting}
+x = input("prvi broj: ")
+r = input("radnja: ")
+y = input("drugi broj: ")
+x = int(x)
+y = int(y)
+if r == "+": 
+    print("zbir: " + str(x+y))
+elif r == "-": print("razlika: " + str(x-y))
+elif r == "*": print("proizvod: " + str(x*y))
+elif r == ":": print("kolicnik: " + str(x/y))
+else: print("Neispravna radnja!")
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 6 - Петља}
+\begin{block}{Loop}
+\begin{lstlisting}
+while 1:
+    x = input("prvi broj: ")
+    r = input("radnja: ")
+    y = input("drugi broj: ")
+    print("\n\ntreba da izracunamo: " + x + r + y )
+    if r == "+": print("zbir: " + str(x+y))
+    elif r == "-": print("razlika: " + str(x-y))
+    elif r == "*": print("proizvod: " + str(x*y))
+    elif r == ":": print("kolicnik: " + str(x/y))
+    else: print("Neispravna radnja!")
+    izlaz = input("Kraj?\t")
+    if izlaz == "d" or izlaz == "D":
+        break
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Енкапсулација и апстракција}
+\begin{itemize}
+    \item Тако далеко сам видио, зато што сам стојао сам на плећима дивова
+    \item Све што постоји, а да је створено људском руком, настало је комбинацијом већ постојећег
+    \item Зашто да измишљамо топлу воду?
+    \item Дајте ми ослонац, помјерићу свијет
+    \item Право питање је: шта је проблем?
+    \item Видјели смо који су типови података, видјели смо које су доступне аритметичке операције.
+    \item Како ћемо израчунати коријен? Синус? Интеграл? 
+    \item Управљати роботом?
+    \item Програмирање игара?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Библиотеке}
+\begin{itemize}
+    \item \texttt{numpy} - нумерички прорачуни
+    \item \texttt{matplotlib} - графичка представа података
+    \item \texttt{math} - напредније математичке операције
+    \item \texttt{sys} - за рад са системским ресурсима
+    \item \texttt{pytorch} - машинско учење
+    \item \texttt{scipy} - још напредније математичке операције
+    \item \texttt{pyserial} - комуникација преко серијског порта
+    \item \texttt{random} - случајне вриједности
+    \item \texttt{time} - в
+    реално вријеме
+    \item \texttt{pyfirmata} - комуникација серијским портом са Ардуином
+    \item и бесконачно много других...
+    \item кључна ријеч \texttt{import}
+    \item \textit{GNU/Linux} оперативни системи се много лакше сналазе са свим овим ресурсима
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 7 - Кориштење библиотека и функција}
+\begin{block}{Function}
+\begin{lstlisting}
+import random
+
+broj = input("Koliko kockica?\n")
+broj = int(broj)
+
+ponovo = "d"
+while ponovo == "d" or ponovo == "D":
+    print("Bacam kockicu...")
+    for i in range(broj):
+        print("Kockica " + str(i+1) + ": " + str(random.randint(1,6)))
+    ponovo = input("Ponovo?\n")
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 8 - Писање и функција}
+\begin{block}{Function}
+\begin{lstlisting}
+def identitet(ime, prezime):
+  print(ime + " " + prezime)
+  x = 5
+
+identitet("Nikola", "Tesla")
+x = 6
+print(x)
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+    \item Домен вриједности промјенљиве:
+    \begin{itemize}
+        \item локални, и
+        \item глобални
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Уграђени (енгл. \textit{embedded}) системи}
+\begin{itemize}
+    \item Уграђени системи су рачунарски системи намијењени за извршавање специфичне функције у реалном времену, и могу да буду сасставни дио обимнијих електромеханичких (над)система.
+    \item Рачунари су, на примјер, системи опште намјене, дакле нису ,,уграђени'' у овом смислу.
+    \item Махом су дигитални, а централни дио је увијек микроконтролер.
+    \item Микроконтролер је процесор са периферијама и (малом) меморијом.
+    \item \textit{Internet of Things} - интернет свега, паметни системи
+    \item Аутомобилска индустрија (енгл. \textit{automotive})
+    \item Интересантан свијет, на граници између хардвера и софтвера, рачунарска електроника, рачунарски инжењеринг, мехатроника, роботика.
+    \item Ардуино је сјајан први корак на том путу.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Примјер 9 - Трепћући Ардуино}
+\begin{block}{Blink}
+\begin{lstlisting}
+import pyfirmata
+import time
+
+board = pyfirmata.Arduino('COM3')
+
+while True:
+    board.digital[13].write(1)
+    time.sleep(1)
+    board.digital[13].write(0)
+    time.sleep(1)
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}{Примјер 10 - Игре}
+\begin{itemize}
+    \item Једноставније игре, текстуалне, као што је бацање коцкице малоприје већ можете да развијате, имате све што је потербно - питање је само идеје.
+    \item \color{violet}\href{https://www.coursera.org/learn/interactive-python-1}{An Introduction to Interactive Programming in Python}
+    \item \href{http://www.codeskulptor.org/}{CodeSkulptor}
+    \item \textit{Demos:}
+    \begin{itemize}
+        \item \textit{Galaxy Invaders}
+        \item \textit{Pyman}
+        \item \textit{Rice Racer}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Референце}
+\begin{itemize}
+    \item \color{violet}\href{https://www.google.com/}{Google}!!!
+    \item \href{python.org}{Python}
+    \item \color{violet}\href{https://skolakoda.github.io/kursevi/}{Школа к\^{o}да}, \color{black} 
+    \item \color{violet}\href{https://www.learnpython.org/}{LearnPython}
+    \item \color{violet}\href{https://www.coursera.org/}{Coursera} \color{black}и \color{violet}\href{https://www.edx.org/}{edX}
+    \item \color{violet}\href{http://uticnionica.etf.unibl.org/}{Утичнионица}\color{black} - основно о Ардуину, са Електротехничког факултета у Бањој Луци
+    %\item Упутство за рад са \textit{CNC} наставком за Ардуино, \color{violet}\href{https://www.youtube.com/watch?v=TMK_fLgpESQ}{видео} \color{black}и \color{violet}\href{https://www.electroniclinic.com/arduino-cnc-shield-v3-0-and-a4988-hybrid-stepper-motor-driver-joystick/}{текст}
+    \item \color{violet}\href{http://1000zabuducnost.org/}{1000 за будућност}\color{black} - увод у рад са:
+    \begin{itemize}
+        \item Пи рачунар
+        \item програмски језик \textit{Python}
+    \end{itemize}
+    \item Званична презентација \color{violet}\href{https://www.raspberrypi.org/}{\textit{Raspberry Pi}}\color{black}
+    \item Увод у електронику - серија \color{violet}\href{https://www.youtube.com/playlist?list=PLh-StTZA7RZ6Ch6Esin2mnoPzFvLZOYu3}{Три минута електронике}
+    \item \href{https://www.nanoluka.org}{Књига о LTspice}\color{black}, софтверском симулатору електричних кола
+\end{itemize}
+\end{frame}
+
+\end{document}
