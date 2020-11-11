@@ -36,7 +36,8 @@ git clone https://github.com/nanoluka/python.git
 
 ## Шта даље?
 
-[Привремена веза](https://www.dropbox.com/s/uo30igra3t60azy/obrada%20signala%20python.pdf?dl=0)
+[Привремена веза - Обрада података](https://www.dropbox.com/s/uo30igra3t60azy/obrada%20signala%20python.pdf?dl=0)
+[Привремена веза - _Firebase_](https://www.dropbox.com/s/raf0aenpwj5wh3t/Firebase%20-%20Python.pdf?dl=0)
 
 ## Контакт
 
